@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koleksi Foto Viral 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #FAFAF7;
+    --ink: #14141A;
+    --muted: #6B6B76;
+    --line: #E7E5DE;
+    --accent: #FF3B5C;
+    --accent-ink: #FFFFFF;
+    --highlight: #FFC93C;
+    --card: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Archivo Black', system-ui, sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: -0.01em;
+  }
+  .brand .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(255,59,92,0.15);
+  }
+  .add-btn {
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .add-btn:hover { background: var(--accent); }
+
+  /* ---------- Add link panel ---------- */
+  .add-panel {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: none;
+  }
+  .add-panel.open { display: block; padding-top: 18px; }
+  .add-panel form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .add-panel input {
+    flex: 1 1 260px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  .add-panel button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .add-panel p.hint {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 8px 2px 0;
+  }
+  .add-panel p.error {
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 8px 2px 0;
+    display: none;
+  }
+
+  /* ---------- Ad slots ---------- */
+  .ad-slot {
+    max-width: 1200px;
+    margin: 22px auto;
+    padding: 0 20px;
+  }
+  .ad-slot .ad-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    color: var(--muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: repeating-linear-gradient(45deg, #fff, #fff 10px, #f6f5f1 10px, #f6f5f1 20px);
+  }
+
+  /* mobile-only banner (320x50) */
+  .mobile-ad { display: flex; justify-content: center; padding: 10px 20px 0; }
+  @media (min-width: 640px) { .mobile-ad { display: none; } }
+
+  /* desktop skyscraper rail (160x300 + 160x600) */
+  .skyscraper-rail {
+    position: fixed;
+    top: 110px;
+    right: 14px;
+    z-index: 15;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+  @media (min-width: 1180px) { .skyscraper-rail { display: flex; } }
+
+  /* ---------- Header hero ---------- */
+  .hero {
+    max-width: 1200px;
+    margin: 28px auto 6px;
+    padding: 0 20px;
+  }
+  .hero h1 {
+    font-family: 'Archivo Black', system-ui, sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .hero p { color: var(--muted); margin: 0; font-size: 0.95rem; }
+
+  /* ---------- Grid ---------- */
+  .grid {
+    max-width: 1200px;
+    margin: 24px auto 60px;
+    padding: 0 20px;
+    column-count: 1;
+    column-gap: 16px;
+  }
+  @media (min-width: 640px)  { .grid { column-count: 2; } }
+  @media (min-width: 980px)  { .grid { column-count: 3; } }
+
+  .card {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+  }
+  .card img {
+    width: 100%;
+    display: block;
+    background: #eee;
+  }
+  .rank {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--ink);
+    color: #fff;
+    font-family: 'Archivo Black', system-ui, sans-serif;
+    font-size: 0.7rem;
+    padding: 4px 9px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .rank::before { content: "🔥"; font-size: 0.7rem; }
+  .caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 22px 12px 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .remove-btn {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(20,20,26,0.55);
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .card:hover .remove-btn { opacity: 1; }
+
+  /* in-feed sponsored card */
+  .card.sponsored {
+    display: flex;
+    flex-direction: column;
+  }
+  .sponsored-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 8px 10px 0;
+  }
+
+  /* ---------- Empty state ---------- */
+  .empty {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+    color: var(--muted);
+  }
+  .empty .big { font-size: 2rem; margin-bottom: 6px; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.78rem;
+    padding: 20px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- =========================================================
+       SEMUA 10 KODE IKLAN ADSTERRA SUDAH TERPASANG:
+       - Banner 728x90   -> atas halaman
+       - Banner 320x50   -> hanya tampil di layar HP (di bawah banner atas)
+       - Banner 160x300 & 160x600 -> rail melayang di kanan (layar lebar saja)
+       - Native banner   -> tersisip di feed foto (setelah foto ke-6)
+       - Banner 300x250  -> sebelum footer
+       - Banner 468x60   -> sebelum footer
+       - Smartlink       -> tautan "Promo" di footer
+       - Popunder & Social Bar -> aktif di seluruh halaman
+     ========================================================== -->
+
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span>Koleksi Foto Viral 2026</div>
+    <button class="add-btn" id="toggleAdd">+ Tambah Foto</button>
+  </div>
+
+  <div class="add-panel" id="addPanel">
+    <form id="addForm">
+      <input type="text" id="driveLink" placeholder="Tempel link Google Drive di sini..." />
+      <input type="text" id="photoName" placeholder="Nama foto (opsional)" style="flex:1 1 180px;" />
+      <button type="submit">Tambahkan</button>
+    </form>
+    <p class="hint">Pastikan file di Google Drive sudah di-share dengan akses "Semua orang yang memiliki link".</p>
+    <p class="error" id="errorMsg">Link Google Drive tidak dikenali. Coba salin ulang link share-nya.</p>
+  </div>
+
+  <!-- SLOT IKLAN ADSTERRA: Banner atas 728x90 -->
+  <div class="ad-slot">
+    <div class="ad-inner">
+      <script>
+        atOptions = {
+          'key' : 'a95ca926dcf8854e275511fb2545a135',
+          'format' : 'iframe',
+          'height' : 90,
+          'width' : 728,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/a95ca926dcf8854e275511fb2545a135/invoke.js"></script>
+    </div>
+  </div>
+
+  <!-- SLOT IKLAN ADSTERRA: Banner mobile 320x50 (hanya tampil di layar kecil) -->
+  <div class="mobile-ad">
+    <script>
+      atOptions = {
+        'key' : '04c4d9d26a0cf977638d004491b9a422',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highperformanceformat.com/04c4d9d26a0cf977638d004491b9a422/invoke.js"></script>
+  </div>
+
+  <!-- SLOT IKLAN ADSTERRA: Skyscraper rail 160x300 & 160x600 (hanya layar lebar) -->
+  <div class="skyscraper-rail">
+    <div>
+      <script>
+        atOptions = {
+          'key' : '89ebac334a8b1a19fb5b4f779442e3a9',
+          'format' : 'iframe',
+          'height' : 300,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/89ebac334a8b1a19fb5b4f779442e3a9/invoke.js"></script>
+    </div>
+    <div>
+      <script>
+        atOptions = {
+          'key' : 'ab801be7c59f2cf06b99cd5d573cf7c0',
+          'format' : 'iframe',
+          'height' : 600,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/ab801be7c59f2cf06b99cd5d573cf7c0/invoke.js"></script>
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>Koleksi Foto Viral 2026</h1>
+    <p>Kumpulan foto yang sedang jadi perbincangan, diurutkan dari yang paling baru ditambahkan.</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="empty" id="emptyState">
+    <div class="big">📷</div>
+    <p>Belum ada foto. Klik "+ Tambah Foto" dan tempel link Google Drive-mu.</p>
+  </div>
+
+  <!-- SLOT IKLAN ADSTERRA: Banner 300x250 -->
+  <div class="ad-slot">
+    <div class="ad-inner">
+      <script>
+        atOptions = {
+          'key' : '5b2832545c4b904c6907a8c98445a073',
+          'format' : 'iframe',
+          'height' : 250,
+          'width' : 300,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/5b2832545c4b904c6907a8c98445a073/invoke.js"></script>
+    </div>
+  </div>
+
+  <!-- SLOT IKLAN ADSTERRA: Banner 468x60 -->
+  <div class="ad-slot">
+    <div class="ad-inner">
+      <script>
+        atOptions = {
+          'key' : 'c8f66a6c1817158fc44d495b4f013d46',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 468,
+          'params' : {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/c8f66a6c1817158fc44d495b4f013d46/invoke.js"></script>
+    </div>
+  </div>
+
+  <footer>
+    Koleksi Foto Viral 2026 ·
+    <a href="https://www.effectivecpmnetwork.com/c0qqj85z?key=892f216c296b9fc6507e890d74d7968c" target="_blank" rel="noopener sponsored" style="color: var(--muted);">Promo</a>
+  </footer>
+
+  <!-- SLOT IKLAN ADSTERRA: Popunder (sitewide) -->
+  <script src="https://pl30599951.effectivecpmnetwork.com/3f/eb/5c/3feb5ca66aea8e7eeb0854be6e0dc089.js"></script>
+
+  <!-- SLOT IKLAN ADSTERRA: Social Bar (sitewide) -->
+  <script src="https://pl30599952.effectivecpmnetwork.com/5e/49/a4/5e49a4f3992c8a88dc8d95a8bd449dea.js"></script>
+
+<script>
+  const grid = document.getElementById('grid');
+  const emptyState = document.getElementById('emptyState');
+  const toggleAdd = document.getElementById('toggleAdd');
+  const addPanel = document.getElementById('addPanel');
+  const addForm = document.getElementById('addForm');
+  const driveLinkInput = document.getElementById('driveLink');
+  const photoNameInput = document.getElementById('photoName');
+  const errorMsg = document.getElementById('errorMsg');
+
+  const STORAGE_KEY = 'viral-photos-2026';
+  let photos = [];
+
+  toggleAdd.addEventListener('click', () => {
+    addPanel.classList.toggle('open');
+    if (addPanel.classList.contains('open')) driveLinkInput.focus();
+  });
+
+  function extractDriveId(url) {
+    const patterns = [
+      /\/file\/d\/([a-zA-Z0-9_-]+)/,
+      /[?&]id=([a-zA-Z0-9_-]+)/,
+      /\/d\/([a-zA-Z0-9_-]+)/
+    ];
+    for (const p of patterns) {
+      const m = url.match(p);
+      if (m) return m[1];
+    }
+    if (/^[a-zA-Z0-9_-]{15,}$/.test(url.trim())) return url.trim();
+    return null;
+  }
+
+  function renderGrid() {
+    grid.innerHTML = '';
+    emptyState.style.display = photos.length ? 'none' : 'block';
+
+    photos.forEach((photo, idx) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <span class="rank">#${idx + 1}</span>
+        <button class="remove-btn" data-id="${photo.id}">×</button>
+        <img src="${photo.imgUrl}" alt="${photo.name || 'Foto viral ' + (idx + 1)}" loading="lazy" />
+        <span class="caption">${photo.name || 'Tanpa judul'}</span>
+      `;
+      grid.appendChild(card);
+
+      // SLOT IKLAN ADSTERRA: Native banner, dipasang sekali saja setelah foto ke-6
+      // (kode native Adsterra terikat pada satu container id, jadi tidak diulang)
+      if (idx === 5) {
+        const adCard = document.createElement('div');
+        adCard.className = 'card sponsored';
+        adCard.innerHTML = `
+          <div class="sponsored-label">Sponsored</div>
+          <div id="container-9376df59a8844456a144afd4102deccc" style="margin:10px;"></div>
+        `;
+        grid.appendChild(adCard);
+        const s = document.createElement('script');
+        s.async = true;
+        s.setAttribute('data-cfasync', 'false');
+        s.src = 'https://pl30599953.effectivecpmnetwork.com/9376df59a8844456a144afd4102deccc/invoke.js';
+        adCard.appendChild(s);
+      }
+    });
+
+    grid.querySelectorAll('.remove-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.getAttribute('data-id');
+        photos = photos.filter((p) => p.id !== id);
+        saveAndRender();
+      });
+    });
+  }
+
+  async function saveAndRender() {
+    renderGrid();
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(photos), false);
+    } catch (err) {
+      console.error('Gagal menyimpan data:', err);
+    }
+  }
+
+  addForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const raw = driveLinkInput.value.trim();
+    const id = extractDriveId(raw);
+    if (!id) {
+      errorMsg.style.display = 'block';
+      return;
+    }
+    errorMsg.style.display = 'none';
+    photos.unshift({
+      id: Date.now().toString(36),
+      driveId: id,
+      imgUrl: `https://drive.google.com/thumbnail?id=${id}&sz=w2000`,
+      name: photoNameInput.value.trim()
+    });
+    driveLinkInput.value = '';
+    photoNameInput.value = '';
+    saveAndRender();
+  });
+
+  async function loadPhotos() {
+    let hasStored = false;
+    try {
+      const result = await window.storage.get(STORAGE_KEY, false);
+      if (result && result.value) {
+        photos = JSON.parse(result.value);
+        hasStored = true;
+      }
+    } catch (err) {
+      // belum ada data tersimpan sebelumnya
+    }
+    if (!hasStored) {
+      photos = [{
+        id: 'seed-nona-sus',
+        driveId: '1BX5Rqa1CiOJfzMbGWj45HXBrpDRinJX7',
+        imgUrl: 'https://drive.google.com/thumbnail?id=1BX5Rqa1CiOJfzMbGWj45HXBrpDRinJX7&sz=w2000',
+        name: 'Nona Sus'
+      }];
+      try {
+        await window.storage.set(STORAGE_KEY, JSON.stringify(photos), false);
+      } catch (err) {
+        console.error('Gagal menyimpan data awal:', err);
+      }
+    }
+    renderGrid();
+  }
+
+  loadPhotos();
+</script>
+</body>
+</html>
